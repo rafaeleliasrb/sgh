@@ -1,12 +1,16 @@
 package br.com.sgh.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +27,14 @@ public class Especialidade extends BaseModel implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 
+	@ManyToMany(
+		cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+		mappedBy = "especialidades",
+		fetch = FetchType.LAZY,
+		targetEntity = Medico.class
+	)
+	private Set<Medico> medicos;	
+	
 	public Long getId() {
 		return id;
 	}
@@ -37,5 +49,13 @@ public class Especialidade extends BaseModel implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Set<Medico> getMedicos() {
+		return medicos;
+	}
+
+	public void setMedicos(Set<Medico> medicos) {
+		this.medicos = medicos;
 	}
 }

@@ -36,7 +36,7 @@ public class Medico extends Pessoa {
 			inverseJoinColumns=@JoinColumn(name="id_especialidade")	   
 			)
 	@OrderBy("nome")
-	private Set<Especialidade> disciplinas;
+	private Set<Especialidade> especialidades;
 
 	public Medico() {}
 
