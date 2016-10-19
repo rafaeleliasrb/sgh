@@ -37,6 +37,18 @@ public class Atendimento extends BaseModel implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atendimento", fetch=FetchType.LAZY)
 	private List<Medicacao> medicacoes;
 
+	
+	public Atendimento() {
+		super(); 
+	}
+
+	public Atendimento(Medico medico, Paciente paciente) {
+		super();
+		this.medico = medico;
+		this.paciente = paciente;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
