@@ -1,0 +1,30 @@
+<ehcache>
+
+
+	<diskStore path="java.io.tmpdir" />
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" />
+
+	<cache name="br.com.sgh.model.Especialidade" 
+		maxElementsInMemory="100" 
+		eternal="false"
+		timeToIdleSeconds="300" 
+		timeToLiveSeconds="600" 
+		overflowToDisk="false" />
+
+	<cache name="br.com.sgh.model.TipoExame" 
+		maxElementsInMemory="200" 
+		eternal="false"
+		timeToIdleSeconds="300" 
+		timeToLiveSeconds="600" 
+		overflowToDisk="false" />
+	
+	<!-- 
+		timeToIdleSeconds: tempo em segundos que um objeto pode permanecer inutilizado no cache. 
+		timeToLiveSeconds: tempo em segundos que um objeto pode ficar em cache.
+		eternal: se configurado para “true”, significa que o cache nunca vai expirar.
+	-->
+	
+	
+</ehcache>

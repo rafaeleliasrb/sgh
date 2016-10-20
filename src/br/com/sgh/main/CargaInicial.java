@@ -1,4 +1,4 @@
-package br.com.sgh.service;
+package br.com.sgh.main;
 
 import java.util.Calendar;
 
@@ -6,7 +6,10 @@ import org.hibernate.Session;
 
 import br.com.sgh.dao.PessoaDao;
 import br.com.sgh.factory.HibernateFactory;
+import br.com.sgh.model.Especialidade;
+import br.com.sgh.model.Medicamento;
 import br.com.sgh.model.Medico;
+import br.com.sgh.model.TipoExame;
 
 public class CargaInicial {
 
@@ -18,7 +21,7 @@ public class CargaInicial {
 		PessoaDao genericDao = new PessoaDao();
 
 		Medico medico1 = new Medico();
-		medico1.setNome("Jo√£o");
+		medico1.setNome("Jo„o");
 
 		Calendar dt = Calendar.getInstance();
 		dt.set(Calendar.YEAR, 1983);
@@ -60,7 +63,7 @@ public class CargaInicial {
 		genericDao.salvar(medico3);		
 
 		Medico medico4 = new Medico();
-		medico4.setNome("Jos√©");
+		medico4.setNome("JosÈ");
 		
 		dt = Calendar.getInstance();
 		dt.set(Calendar.YEAR, 1975);
@@ -73,6 +76,28 @@ public class CargaInicial {
 
 		genericDao.salvar(medico4);
 		
+		for(int i=1;i<=200;i++){
+			Especialidade esp = new Especialidade();
+			esp.setEstaAtivo(true);
+			esp.setNome("Especialidade " + i);
+			genericDao.salvar(esp);
+		}
+
+		for(int i=1;i<=250;i++){
+			TipoExame te = new TipoExame();
+			te.setNome("Exame Tipo " + i);
+			te.setEstaAtivo(true);
+			genericDao.salvar(te);
+		}
+
+		for(int i=1;i<=2500;i++){
+			Medicamento medicamento = new Medicamento();
+			medicamento.setNome("Medicamento " + i);
+			medicamento.setMarca("Marca " + ((i%20)+1));
+			medicamento.setEstaAtivo(true);
+			genericDao.salvar(medicamento);
+		}
+
 		session.getTransaction().commit();
 	}
 }
