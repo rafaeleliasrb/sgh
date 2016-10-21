@@ -13,32 +13,15 @@ public class AtendimentoBean {
 
 	private List<Atendimento> listaAtendimento;
 	
-	private String cpf;
+	public void listarAtendimentos() {
+		
+	}
 	
-	private String senha;
-
 	public List<Atendimento> getListaAtendimento() {
 		return listaAtendimento;
 	}
 
 	public void setListaAtendimento(List<Atendimento> listaAtendimento) {
 		this.listaAtendimento = listaAtendimento;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-		
+	}	
 }

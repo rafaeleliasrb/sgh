@@ -3,31 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title><h:outputText value="Atendimentos" /></title>
 </h:head>
 <h:body>
 	<div align="center">
 		<h1>
-			<h:outputText value="Lista de Atendimento" />
+			<h:outputText value="Sistema de Gestão Hospitalar" />
 		</h1>
 		<h:form id="loginForm">
-			<h:message for="loginForm" errorStyle="color: red;" />
-			<h:panelGrid columns="3">
-				<h:outputLabel for="cpfInput"
-					value="CPF:" />
-				<h:inputText id="cpfInput" value="#{atendimentoBean.cpf}" maxlength="11"
-					size="12" required="true" />
-				<h:message for="cpfInput" errorStyle="color: red;" />
-				<h:outputLabel for="senhaInput"
-					value="senha:" />
-				<h:inputSecret id="senhaInput" value="#{atendimentoBean.senha}"
-					maxlength="11" size="12" required="true" />
-				<h:message for="senhaInput" errorStyle="color: red;" />
-			</h:panelGrid>
-			<h:commandButton action="#{atendimentoBean.cadastrar}"
-				value="cadastrar" />
+			<p:commandButton action="#{atendimentoBean.listarAtendimentos}"
+				value="Listar Atendimentos" />
+			
+			<p:dataTable value="#{atendimentoBean.listaAtendimento}" var="atendimento" 
+				emptyMessage="Nenhum atendimento cadastrado">
+				<p:column headerText="Paciente">
+					<h:outputText value="#{atendimento.paciente.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Médico">
+					<h:outputText value="#{atendimento.medico.nome}"/>
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</div>
 </h:body>
