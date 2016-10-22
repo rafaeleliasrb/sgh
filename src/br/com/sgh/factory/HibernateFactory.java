@@ -10,7 +10,9 @@ public class HibernateFactory {
 	
 	public static synchronized Session getHibernateSession(){	
 		if(sf == null){
-			sf = new Configuration().configure().buildSessionFactory();
+			Configuration cfg = new Configuration();
+			cfg.configure();
+			sf = cfg.buildSessionFactory();
 		}
 		Session s = sf.getCurrentSession();		
 		return s;

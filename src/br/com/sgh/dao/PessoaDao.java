@@ -1,17 +1,38 @@
 package br.com.sgh.dao;
 
-import br.com.sgh.model.Medico;
+import java.util.List;
 
-public class PessoaDao extends GenericDao{	
+import javax.ejb.Stateless;
+
+import br.com.sgh.model.Medico;
+import br.com.sgh.model.Paciente;
+import br.com.sgh.model.Pessoa;
+
+@Stateless
+public class PessoaDao extends GenericDao<Pessoa>{	
 	
-    public PessoaDao() {
+    public PessoaDao() throws Exception {
     	super();
     }    
       
-    public Medico getProfessor(Integer id) throws Exception{
-    	String consulta = "from Professor p where p.id = :id " +
-    										  "and p.estaAtivo = true";
+    public Medico getMedico(Integer id) throws Exception{
+    	String consulta = "from Medico m where m.id = :id " +
+    										  "and m.estaAtivo = true";
     	return (Medico)super.session.createQuery(consulta).setParameter("id", id).uniqueResult();
     }
+    
+    @SuppressWarnings("unchecked")
+	public List<Medico> getMedicos() {
+    	String consulta = " from Medico m order by nome";
+    	
+    	return (List<Medico>) super.session.createQuery(consulta);
+    }
+
+	@SuppressWarnings("unchecked")
+	public List<Paciente> getPacientes() {
+		String consulta = " from Paciente p order by nome";
+    	
+    	return (List<Paciente>) super.session.createQuery(consulta);
+	}
     
 }

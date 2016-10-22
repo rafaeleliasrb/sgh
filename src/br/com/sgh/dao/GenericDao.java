@@ -3,32 +3,30 @@ package br.com.sgh.dao;
 import java.util.List;
 import org.hibernate.Session;
 import br.com.sgh.factory.HibernateFactory;
-import br.com.sgh.model.BaseModel;
 
-public abstract class GenericDao {	
+public class GenericDao<E> {	
 	
 	protected final Session session;
 	
-    public GenericDao() {
+    public GenericDao() throws Exception {
     	this.session = HibernateFactory.getHibernateSession();
     }
     
-    public void salvar(BaseModel bm){
+    public void salvar(E bm){
     	session.saveOrUpdate(bm);
     }
     
-    public void deletar(BaseModel bm){
+    public void deletar(E bm){
     	session.delete(bm);
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<BaseModel> listarTodos(Class bm){
+	public List<E> listarTodos(Class bm){
     	return session.createQuery("from "+bm.getName()+" e where e.estaAtivo = true").list();
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<BaseModel> listarTodosComLimite(Class bm, Integer limite){
+	public List<E> listarTodosComLimite(Class bm, Integer limite){
     	return session.createQuery("from "+bm.getName()+" e where e.estaAtivo = true").setMaxResults(limite).list();
     }
-    
 }
