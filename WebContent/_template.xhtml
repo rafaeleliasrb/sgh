@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<h:outputStylesheet library="css" name="geral.css"/>
+	</h:head>
+	
+	<h:body>
+		<div id="cabecalho">
+			<h:graphicImage library="img" name="logo_FA7_vetorial.png" width="100"/>
+			
+			<!-- <p:growl id="grow" showDetail="true" autoUpdate="true"/> -->
+			
+			<h:form>
+				<p:menuButton value="Menu">
+					<p:menuitem value="Atendimentos" action="atendimentos?faces-redirect=true"
+						icon="fa fa-fw fa-edit"/>
+					<p:menuitem value="Medicamentos" action="medicamentos?faces-redirect=true"
+						icon="fa fa-fw fa-edit"/>
+				</p:menuButton>
+			</h:form>
+			
+			<h1 style="margin-bottom: 0px;"><ui:insert name="titulo"></ui:insert></h1>
+			<p:separator></p:separator>
+		</div>
+		
+		<div id="conteudo" align="center">
+			<ui:insert name="conteudo"></ui:insert>
+		</div>
+		
+		<br/>
+		
+		<div id="rodape">
+			Copyright 2016
+			<div>
+				<ui:insert name="rodape"></ui:insert>
+			</div>
+		</div>
+	</h:body>
+</html>

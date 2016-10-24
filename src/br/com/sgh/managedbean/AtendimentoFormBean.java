@@ -3,9 +3,9 @@ package br.com.sgh.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +17,7 @@ import br.com.sgh.model.Paciente;
 
 @SuppressWarnings("serial")
 @Named
-@SessionScoped
+@ViewScoped
 public class AtendimentoFormBean implements Serializable {
 
 	@Inject
