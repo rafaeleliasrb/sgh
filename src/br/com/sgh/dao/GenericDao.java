@@ -15,11 +15,11 @@ public class GenericDao<E> {
 	}
 
 	public void salvar(E bm) {
-		session.saveOrUpdate(bm);
+		getSession().saveOrUpdate(bm);
 	}
 
 	public void deletar(E bm) {
-		session.delete(bm);
+		getSession().delete(bm);
 	}
 
 	protected Session getSession() {
