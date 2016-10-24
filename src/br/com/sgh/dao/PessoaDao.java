@@ -25,14 +25,14 @@ public class PessoaDao extends GenericDao<Pessoa>{
 	public List<Medico> getMedicos() {
     	String consulta = " from Medico m order by nome";
     	
-    	return (List<Medico>) super.session.createQuery(consulta);
+    	return (List<Medico>) super.session.createQuery(consulta).list();
     }
 
 	@SuppressWarnings("unchecked")
 	public List<Paciente> getPacientes() {
 		String consulta = " from Paciente p order by nome";
     	
-    	return (List<Paciente>) super.session.createQuery(consulta);
+    	return (List<Paciente>) super.session.createQuery(consulta).list();
 	}
     
 }

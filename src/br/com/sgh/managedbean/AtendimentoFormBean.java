@@ -48,6 +48,9 @@ public class AtendimentoFormBean implements Serializable{
 	}
 
 	public Atendimento getAtendimento() {
+		if(atendimento == null) {
+			atendimento = new Atendimento();
+		}
 		return atendimento;
 	}
 

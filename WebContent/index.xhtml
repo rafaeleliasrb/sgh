@@ -13,9 +13,9 @@
 		<h1>
 			<h:outputText value="Sistema de Gestão Hospitalar" />
 		</h1>
+		<!-- http://stackoverflow.com/questions/3642919/javax-faces-application-viewexpiredexception-view-could-not-be-restored  -->
 		<h:form id="loginForm">
-			<p:commandButton action="atendimentos"
-				value="Listar Atendimentos" />
+			<p:button outcome="atendimentos" value="Listar Atendimentos" />
 		</h:form>
 	</div>
 </h:body>
