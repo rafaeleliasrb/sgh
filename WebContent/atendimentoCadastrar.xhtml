@@ -13,25 +13,24 @@
 		<p:messages autoUpdate="true"/>
 		<h:form id="atendimentoCadastrarForm">
 			
-			<p:selectOneMenu value="#{atendimentoFormBean.atendimento.medico}"
+			<p:selectOneMenu value="#{atendimentoFormBean.medicoId}"
 				filter="true" caseSensitive="true"
-				required="true" requiredMessage="Selecione um médico"
-				converter="entityConverter">
+				required="true" requiredMessage="Selecione um médico">
 				<f:selectItem itemLabel="Selecione..." itemValue=""/>
 				<f:selectItems value="#{atendimentoFormBean.medicos}" var="medico"
-					itemLabel="#{medico.nome}" itemValue="#{medico}"/>
+					itemLabel="#{medico.nome}" itemValue="#{medico.id}"/>
 			</p:selectOneMenu>
 			
-			<p:selectOneMenu value="#{atendimentoFormBean.atendimento.paciente}"
+			<p:selectOneMenu value="#{atendimentoFormBean.pacienteId}"
 				filter="true" caseSensitive="true"
-				required="true" requiredMessage="Selecione um paciente"
-				converter="entityConverter">
+				required="true" requiredMessage="Selecione um paciente">
 				<f:selectItem itemLabel="Selecione..." itemValue=""/>
 				<f:selectItems value="#{atendimentoFormBean.pacientes}" var="paciente"
-					itemLabel="#{paciente.nome}" itemValue="#{paciente}"/>
+					itemLabel="#{paciente.nome}" itemValue="#{paciente.id}"/>
 			</p:selectOneMenu>
 			
-			<p:commandButton value="Salvar Atendimento" action="#{atendimentoFormBean.salvar}"/>
+			<p:commandButton value="Salvar Atendimento" action="#{atendimentoFormBean.salvar}"
+				process="@form"/>
 		</h:form>
 	</div>
 </h:body>

@@ -15,24 +15,30 @@ public class PessoaDao extends GenericDao<Pessoa>{
     	super();
     }    
       
-    public Medico getMedico(Integer id) throws Exception{
+    public Medico getMedico(Integer id) {
     	String consulta = "from Medico m where m.id = :id " +
     										  "and m.estaAtivo = true";
-    	return (Medico)super.session.createQuery(consulta).setParameter("id", id).uniqueResult();
+    	return (Medico)super.getSession().createQuery(consulta).setParameter("id", id).uniqueResult();
     }
     
     @SuppressWarnings("unchecked")
 	public List<Medico> getMedicos() {
     	String consulta = " from Medico m order by nome";
     	
-    	return (List<Medico>) super.session.createQuery(consulta).list();
+    	return (List<Medico>) super.getSession().createQuery(consulta).list();
     }
 
 	@SuppressWarnings("unchecked")
 	public List<Paciente> getPacientes() {
 		String consulta = " from Paciente p order by nome";
     	
-    	return (List<Paciente>) super.session.createQuery(consulta).list();
+    	return (List<Paciente>) super.getSession().createQuery(consulta).list();
+	}
+
+	public Paciente getPaciente(Integer id) {
+		String consulta = "from Paciente m where m.id = :id " +
+				  "and m.estaAtivo = true";
+		return (Paciente)super.getSession().createQuery(consulta).setParameter("id", id).uniqueResult();
 	}
     
 }

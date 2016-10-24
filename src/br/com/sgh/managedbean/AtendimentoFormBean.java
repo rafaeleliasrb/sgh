@@ -3,9 +3,9 @@ package br.com.sgh.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,11 +15,10 @@ import br.com.sgh.model.Atendimento;
 import br.com.sgh.model.Medico;
 import br.com.sgh.model.Paciente;
 
+@SuppressWarnings("serial")
 @Named
-@ViewScoped
-public class AtendimentoFormBean implements Serializable{
-
-	private static final long serialVersionUID = -905937529431573051L;
+@SessionScoped
+public class AtendimentoFormBean implements Serializable {
 
 	@Inject
 	private AtendimentoDao atendimentoDao;
@@ -27,10 +26,17 @@ public class AtendimentoFormBean implements Serializable{
 	private PessoaDao pessoaDao;
 	
 	private List<Medico> medicos;
+	private Integer medicoId;
 	private List<Paciente> pacientes;
-	private Atendimento atendimento;
+	private Integer pacienteId;
+	private Atendimento atendimento = new Atendimento();
 
 	public void salvar() {
+		Medico medico = pessoaDao.getMedico(medicoId);
+		atendimento.setMedico(medico);
+		Paciente paciente = pessoaDao.getPaciente(pacienteId);
+		atendimento.setPaciente(paciente);
+		
 		atendimentoDao.salvar(atendimento);
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atendimento salvo com sucesso.", null));
@@ -48,9 +54,6 @@ public class AtendimentoFormBean implements Serializable{
 	}
 
 	public Atendimento getAtendimento() {
-		if(atendimento == null) {
-			atendimento = new Atendimento();
-		}
 		return atendimento;
 	}
 
@@ -67,6 +70,22 @@ public class AtendimentoFormBean implements Serializable{
 
 	public void setPacientes(List<Paciente> pacientes) {
 		this.pacientes = pacientes;
+	}
+
+	public Integer getMedicoId() {
+		return medicoId;
+	}
+
+	public void setMedicoId(Integer medicoId) {
+		this.medicoId = medicoId;
+	}
+
+	public Integer getPacienteId() {
+		return pacienteId;
+	}
+
+	public void setPacienteId(Integer pacienteId) {
+		this.pacienteId = pacienteId;
 	}
 
 }
