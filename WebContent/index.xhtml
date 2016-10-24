@@ -5,18 +5,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title><h:outputText value="Atendimentos" /></title>
-</h:head>
-<h:body>
-	<div align="center">
-		<h1>
+
+	<ui:composition template="_template.xhtml">
+	
+		<ui:define name="titulo">
 			<h:outputText value="Sistema de Gestão Hospitalar" />
-		</h1>
-		<!-- http://stackoverflow.com/questions/3642919/javax-faces-application-viewexpiredexception-view-could-not-be-restored  -->
-		<h:form id="loginForm">
-			<p:button outcome="atendimentos" value="Listar Atendimentos" />
-		</h:form>
-	</div>
-</h:body>
+		</ui:define>
+		
+		<ui:define name="conteudo">
+			<!-- http://stackoverflow.com/questions/3642919/javax-faces-application-viewexpiredexception-view-could-not-be-restored  -->
+			<h:form id="loginForm">
+				<p:button outcome="atendimentos" value="Listar Atendimentos" />
+			</h:form>
+		</ui:define>
+		
+		<!-- <ui:define name="rodape">Sistema de Gestão Hospitalar</ui:define> -->
+	</ui:composition>
 </html>

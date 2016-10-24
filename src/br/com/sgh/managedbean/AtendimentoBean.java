@@ -19,25 +19,15 @@ public class AtendimentoBean implements Serializable{
 	private AtendimentoDao atendimentoDao;
 	
 	private List<Atendimento> atendimentos;
-	private Atendimento atendimento;
-	
-	public void listarAtendimentos() {
-		atendimentos = atendimentoDao.listarTodos(Atendimento.class);
-	}
 	
 	public List<Atendimento> getAtendimentos() {
+		if(atendimentos == null) {
+			atendimentos = atendimentoDao.listarTodos(Atendimento.class);
+		}
 		return atendimentos;
 	}
 
 	public void setAtendimentos(List<Atendimento> listaAtendimento) {
 		this.atendimentos = listaAtendimento;
 	}
-
-	public Atendimento getAtendimento() {
-		return atendimento;
-	}
-
-	public void setAtendimento(Atendimento atendimento) {
-		this.atendimento = atendimento;
-	}	
 }
