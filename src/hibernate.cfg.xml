@@ -25,12 +25,14 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">false</property>		
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
-		
+		<!-- <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>  -->
+		<property name="connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+		 
 		<property name="hibernate.cache.use_query_cache">true</property>
 		<property name="hibernate.max_fetch_depth">2</property>
 		<property name="hibernate.cache.use_second_level_cache">true</property>
-		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<!-- <property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>  -->
 		
 		<mapping class="br.com.sgh.model.Pessoa" />
 		<mapping class="br.com.sgh.model.Medico" />
@@ -44,7 +46,7 @@
 
 		<class-cache class="br.com.sgh.model.Especialidade" usage="read-only" />
 		<class-cache class="br.com.sgh.model.TipoExame" usage="read-only" />
-		<class-cache class="br.com.sgh.model.Medicamento" usage="read-write" />
+		<class-cache class="br.com.sgh.model.Medicamento" usage="read-only" />
 		
 	</session-factory>
 

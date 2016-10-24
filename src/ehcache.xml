@@ -19,6 +19,13 @@
 		timeToIdleSeconds="300" 
 		timeToLiveSeconds="600" 
 		overflowToDisk="false" />
+
+	<cache name="br.com.sgh.model.Medicamento" 
+		maxElementsInMemory="5000" 
+		eternal="false"
+		timeToIdleSeconds="300" 
+		timeToLiveSeconds="600" 
+		overflowToDisk="false" />
 	
 	<!-- 
 		timeToIdleSeconds: tempo em segundos que um objeto pode permanecer inutilizado no cache. 

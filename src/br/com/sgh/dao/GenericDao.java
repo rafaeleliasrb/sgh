@@ -1,12 +1,14 @@
 package br.com.sgh.dao;
 
 import java.util.List;
+
 import org.hibernate.Session;
+
 import br.com.sgh.factory.HibernateFactory;
 
 public class GenericDao<E> {	
 	
-	protected final Session session;
+	protected Session session;
 	
     public GenericDao() throws Exception {
     	this.session = HibernateFactory.getHibernateSession();
@@ -22,7 +24,9 @@ public class GenericDao<E> {
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<E> listarTodos(Class bm){
-    	return session.createQuery("from "+bm.getName()+" e where e.estaAtivo = true").list();
+    	List<E> listaTodos = session.createQuery("from "+bm.getName()+" e where e.estaAtivo = true").list();
+    	listaTodos = session.createQuery("from "+bm.getName()+" e where e.estaAtivo = true").list();
+    	return listaTodos;
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
