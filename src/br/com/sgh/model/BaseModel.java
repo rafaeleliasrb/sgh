@@ -23,7 +23,7 @@ public abstract class BaseModel implements Serializable {
 	public void setEstaAtivo(Boolean estaAtivo) {
 		this.estaAtivo = estaAtivo;
 	}
-	
+		
 	@Override
 	public Object clone() {
 		try {
