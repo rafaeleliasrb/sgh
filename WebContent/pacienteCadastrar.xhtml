@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><h:outputText value="Pacientes" /></title>
+</h:head>
+<h:body>
+	<h:form id="pacienteCadastroForm">
+		<p:messages />
+		<p:growl autoUpdate="true" showSummary="true" showDetail="true" />
+		<div align="center">
+			<h2><h:outputText value="Cadastro  de Pacientes" /></h2>
+		</div>
+		<div align="left">
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputText value="Dados do Paciente" />
+				</f:facet>
+				<p:outputLabel value="Id:" for="idPaciente" />
+				<p:inputText value="#{pacienteBean.paciente.id}" id="idPaciente" disabled="true" />
+				<p:outputLabel value="Nome:" for="nomePaciente" />
+				<p:inputText value="#{pacienteBean.paciente.nome}" id="nomePaciente" />
+				<p:outputLabel value="CPF:" for="cpfPaciente" />
+				<p:inputText value="#{pacienteBean.paciente.cpf}" id="cpfPaciente"/>
+				<p:outputLabel value="Data de Nascimento:" for="dataNascimentoPaciente" />
+				<p:calendar id="dataNascimentoPaciente" pattern="dd/MM/YYYY" value="#{pacienteBean.paciente.dataNascimento}"  showOn="button" />
+				<p:outputLabel value="Matrícula:" for="matriculaPaciente" />
+				<p:inputText value="#{pacienteBean.paciente.matricula}" id="matriculaPaciente"/>
+				<f:facet name="footer">
+					<div align="center">
+						<p:commandButton value="Voltar" ajax="false" action="pacientes?faces-redirect=true"  />
+						<p:commandButton value="Salvar" actionListener="#{pacienteBean.salvar}" 
+								icon="ui-icon-check"/>
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</div>
+	</h:form>
+</h:body>
+</html>

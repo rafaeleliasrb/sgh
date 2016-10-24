@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><h:outputText value="Pacientes" /></title>
+</h:head>
+<h:body>
+	<div align="center">
+		<p:growl autoUpdate="true" showSummary="true" showDetail="true" life="5000" />
+		<h2><h:outputText value="Pacientes" /></h2>
+		<h:form id="pacientesForm">
+			<p:dataTable value="#{pacienteBean.listaPacientes}" var="paciente" id="tabelaPacientes" 
+					emptyMessage="Não há pacientes cadastrados" rows="10"
+					paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,50">
+
+				<p:column headerText="ID" width="50px;">
+					<h:outputText value="#{paciente.id}"/>
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{paciente.nome}"/>
+				</p:column>
+				
+				<p:column headerText="CPF" width="150px;">
+					<h:outputText value="#{paciente.cpf}"/>
+				</p:column>
+
+				<p:column headerText="Data de Nascimento" width="150px;">
+					<h:outputText value="#{paciente.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/YYYY" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Matrícula" width="150px;">
+					<h:outputText value="#{paciente.matricula}"/>
+				</p:column>
+				
+				<p:column headerText="Ações" width="120px;">
+   					<p:commandButton title="Editar" icon="ui-icon-pencil" 
+  							action="#{pacienteBean.editar}"/>
+   					<p:commandButton title="Excluir" icon="ui-icon-trash" ajax="false" update="@form"
+   							actionListener="#{pacienteBean.excluir}">
+   					</p:commandButton>
+				</p:column>				
+			</p:dataTable>
+			<br />
+			<p:commandButton value="Novo Paciente" ajax="false" action="pacienteCadastrar?faces-redirect=true"/>
+		</h:form>
+	</div>
+</h:body>
+</html>

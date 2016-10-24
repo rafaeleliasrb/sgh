@@ -24,4 +24,9 @@ public class Paciente extends Pessoa {
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
+
+	@Override
+	public String toString() {
+		return "Paciente [nome=" + nome + ", cpf=" + cpf + "]";
+	}		
 }
