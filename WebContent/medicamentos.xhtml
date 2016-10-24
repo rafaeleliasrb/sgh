@@ -12,8 +12,9 @@
 	<div align="center">
 		<h3><h:outputText value="Medicamentos" /></h3>
 		<h:form id="medicamentosForm">
-			<p:dataTable value="#{medicamentoBean.listaMedicamentos}" var="medicamento" 
-				emptyMessage="Não há medicamentos cadastrados">
+			<p:dataTable value="#{medicamentoBean.lazyDataModel}" var="medicamento" lazy="true" 
+					emptyMessage="Não há medicamentos cadastrados" rows="10"
+					paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
 				<p:column headerText="Nome">
 					<h:outputText value="#{medicamento.nome}"/>
 				</p:column>
@@ -22,7 +23,7 @@
 					<h:outputText value="#{medicamento.marca}"/>
 				</p:column>
 			</p:dataTable>
-			
+			<br />
 			<p:commandButton value="Novo Medicamento" action="medicamentoCadastrar"/>
 		</h:form>
 	</div>

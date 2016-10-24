@@ -14,7 +14,10 @@ public class HibernateFactory {
 			cfg.configure();
 			sf = cfg.buildSessionFactory();
 		}
-		Session s = sf.getCurrentSession();		
+		Session s = sf.getCurrentSession();
+		if(!s.isOpen()){
+			s = sf.openSession();
+		}
 		return s;
 	}
 }
