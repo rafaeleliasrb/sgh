@@ -46,7 +46,7 @@
 
 		<class-cache class="br.com.sgh.model.Especialidade" usage="read-only" />
 		<class-cache class="br.com.sgh.model.TipoExame" usage="read-only" />
-		<class-cache class="br.com.sgh.model.Medicamento" usage="read-only" />
+		<class-cache class="br.com.sgh.model.Medicamento" usage="read-write" />
 		
 	</session-factory>
 

@@ -46,5 +46,31 @@ public class Medico extends Pessoa {
 
 	public void setCrm(String crm) {
 		this.crm = crm;
+	}
+
+	public Set<Especialidade> getEspecialidades() {
+		return especialidades;
+	}
+
+	public void setEspecialidades(Set<Especialidade> especialidades) {
+		this.especialidades = especialidades;
 	}   
+	
+	public String getEspecialidadesString(){
+		if(especialidades == null || especialidades.isEmpty()){
+			return "";
+		}
+		StringBuilder retorno = new StringBuilder("");
+		for (Especialidade especialidade : especialidades) {
+			retorno.append(especialidade.getNome());
+			retorno.append(", ");
+		}
+		return retorno.toString().substring(0, (retorno.length()-2));
+	}
+
+	@Override
+	public String toString() {
+		return "Medico [crm=" + crm + ", nome=" + nome + "]";
+	}		
+	
 }

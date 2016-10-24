@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><h:outputText value="Médicos" /></title>
+</h:head>
+<h:body>
+	<div align="center">
+		<p:growl autoUpdate="true" showSummary="true" showDetail="true" life="5000" />
+		<h2><h:outputText value="Médicos" /></h2>
+		<h:form id="medicosForm">
+			<p:dataTable value="#{medicoBean.listaMedicos}" var="medico" id="tabelaMedicos" 
+					emptyMessage="Não há médicos cadastrados" rows="10"
+					paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,50">
+
+				<p:column headerText="ID" width="50px;">
+					<h:outputText value="#{medico.id}"/>
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{medico.nome}"/>
+				</p:column>
+				
+				<p:column headerText="CPF" width="120px;">
+					<h:outputText value="#{medico.cpf}"/>
+				</p:column>
+
+				<p:column headerText="CRM" width="120px;">
+					<h:outputText value="#{medico.crm}"/>
+				</p:column>
+
+				<p:column headerText="Data de Nascimento" width="100px;">
+					<h:outputText value="#{medico.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/YYYY" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Especialidades" width="300px;" 
+						style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+					<h:outputText value="#{medico.especialidadesString}" title="#{medico.especialidadesString}"/>
+				</p:column>
+				
+				<p:column headerText="Ações" width="100px;">
+   					<p:commandButton title="Editar" icon="ui-icon-pencil" 
+  							action="#{medicoBean.editar}"/>
+   					<p:commandButton title="Excluir" icon="ui-icon-trash" ajax="false" update="@form"
+   							actionListener="#{medicoBean.excluir}">
+   					</p:commandButton>
+				</p:column>				
+			</p:dataTable>
+			<br />
+			<p:commandButton value="Novo Médico" ajax="false" action="medicoCadastrar?faces-redirect=true"/>
+		</h:form>
+	</div>
+</h:body>
+</html>
