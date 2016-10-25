@@ -48,6 +48,11 @@ public class Atendimento extends BaseModel implements Serializable {
 			   mappedBy = "atendimento", 
 			   fetch=FetchType.LAZY)
 	private List<Medicacao> medicacoes;
+	
+	@OneToMany(cascade = CascadeType.ALL, 
+			   mappedBy = "atendimento", 
+			   fetch=FetchType.LAZY)
+	private List<Exame> exames;
 
 	public Atendimento() {
 		super(); 
@@ -98,5 +103,13 @@ public class Atendimento extends BaseModel implements Serializable {
 
 	public void setMedicacoes(List<Medicacao> medicacoes) {
 		this.medicacoes = medicacoes;
+	}
+	
+	public List<Exame> getExames() {
+		return exames;
+	}
+	
+	public void setExames(List<Exame> exames) {
+		this.exames = exames;
 	}
 }

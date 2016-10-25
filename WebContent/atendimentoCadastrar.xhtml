@@ -34,6 +34,20 @@
 							itemLabel="#{paciente.nome}" itemValue="#{paciente.id}"/>
 					</p:selectOneMenu>
 				</p:panelGrid>
+
+				<p:dataTable value="#{atendimentoFormBean.atendimento.exames}" var="exame">
+					<p:column>
+						<h:outputText value="#{exame.dataRealizacao}"/>
+					</p:column>
+					
+					<p:column>
+						<h:outputText value="#{exame.tipoExame.nome}"/>
+					</p:column>
+					
+					<f:facet name="footer">
+						<p:commandButton value="Adicionar Exame" action="#{atendimentoFormBean.adicionarExame}"/>
+					</f:facet>
+				</p:dataTable>
 				
 				<p:commandButton value="Salvar Atendimento" action="#{atendimentoFormBean.salvar}"
 					process="@form" styleClass="mg-top-padrao"/>

@@ -11,4 +11,8 @@ public class TipoExameDao extends GenericDao<TipoExame>{
 		super();
 	}
 
+	public TipoExame getTipoExame(Integer id) {
+		return (TipoExame) super.getSession().load(TipoExame.class, id);
+	}
+
 }

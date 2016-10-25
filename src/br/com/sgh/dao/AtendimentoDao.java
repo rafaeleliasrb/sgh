@@ -9,4 +9,8 @@ public class AtendimentoDao extends GenericDao<Atendimento> {
 	public AtendimentoDao() throws Exception {
 		super();
 	}
+
+	public Atendimento getAtendimento(Integer id) {
+		return (Atendimento) super.getSession().load(Atendimento.class, id);
+	}
 }

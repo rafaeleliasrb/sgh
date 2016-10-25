@@ -23,6 +23,11 @@
 					<p:column headerText="Médico">
 						<h:outputText value="#{atendimento.medico.nome}"/>
 					</p:column>
+					
+					<p:column>
+						<p:commandButton action="#{atendimentoBean.editar(atendimento)}"
+							icon="ui-icon-pencil"/>
+					</p:column>
 				</p:dataTable>
 				
 				<p:button value="Novo Atendimento" outcome="atendimentoCadastrar"

@@ -3,6 +3,7 @@ package br.com.sgh.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,6 +20,15 @@ public class AtendimentoBean implements Serializable{
 	private AtendimentoDao atendimentoDao;
 	
 	private List<Atendimento> atendimentos;
+	
+	public String editar(Atendimento atendimento) {
+		FacesContext.getCurrentInstance()
+					.getExternalContext()
+					.getFlash()
+					.put("atendimentoId", atendimento.getId());
+		
+		return "atendimentoCadastrar?faces-redirect=true";
+	}
 	
 	public List<Atendimento> getAtendimentos() {
 		if(atendimentos == null) {

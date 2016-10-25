@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="_template.xhtml">
+	
+		<ui:define name="titulo">
+			<h:outputText value="Cadastrar Exame" />
+		</ui:define>
+		
+		<ui:define name="conteudo">
+			<p:messages autoUpdate="true"/>
+			<h:form id="atendimentoCadastrarForm">
+				<p:panelGrid columns="2">
+					<h:outputLabel value="Data realização:" for="dataRealizacao"/>
+					<p:calendar value="#{exameBean.exame.dataRealizacao}" />
+					
+					<h:outputLabel value="Tipo de exame:" for="tipoExame"/>
+					<p:selectOneMenu id="tipoExame" value="#{exameBean.tipoExameId}"
+						filter="true" caseSensitive="true"
+						required="true" requiredMessage="Selecione um tipo de exame">
+						<f:selectItem itemLabel="Selecione..." itemValue=""/>
+						<f:selectItems value="#{exameBean.tipoExames}" var="tipoExame"
+							itemLabel="#{tipoExame.nome}" itemValue="#{tipoExame.id}"/>
+					</p:selectOneMenu>
+				</p:panelGrid>
+				
+				<p:commandButton value="Salvar Exame" action="#{exameBean.salvar}"
+					process="@form" styleClass="mg-top-padrao"/>
+			</h:form>
+		</ui:define>
+		
+		<!-- <ui:define name="rodape">Cadastrar Atendimento</ui:define> -->
+	</ui:composition>
+</html>

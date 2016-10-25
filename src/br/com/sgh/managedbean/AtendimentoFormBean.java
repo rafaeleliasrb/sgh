@@ -3,6 +3,7 @@ package br.com.sgh.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -31,6 +32,17 @@ public class AtendimentoFormBean implements Serializable {
 	private Integer pacienteId;
 	private Atendimento atendimento = new Atendimento();
 
+	@PostConstruct
+	public void init() {
+		Integer id = (Integer) FacesContext.getCurrentInstance()
+				.getExternalContext().getFlash().get("atendimentoId");
+		if(id != null) {
+			atendimento = atendimentoDao.getAtendimento(id);
+			medicoId = atendimento.getMedico().getId();
+			pacienteId = atendimento.getPaciente().getId();
+		}
+	}
+	
 	public void salvar() {
 		Medico medico = pessoaDao.getMedico(medicoId);
 		atendimento.setMedico(medico);
@@ -40,6 +52,13 @@ public class AtendimentoFormBean implements Serializable {
 		atendimentoDao.salvar(atendimento);
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atendimento salvo com sucesso.", null));
+	}
+	
+	public String adicionarExame() {
+		FacesContext.getCurrentInstance()
+					.getExternalContext().getFlash().put("atendimentoId", atendimento.getId());
+		
+		return "exameCadastrar?faces-redirect=true";
 	}
 	
 	public List<Medico> getMedicos() {
