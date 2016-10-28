@@ -11,6 +11,7 @@ public class AtendimentoDao extends GenericDao<Atendimento> {
 	}
 
 	public Atendimento getAtendimento(Integer id) {
-		return (Atendimento) super.getSession().load(Atendimento.class, id);
+		Atendimento load = (Atendimento) super.getSession().get(Atendimento.class, id);
+		return load;
 	}
 }

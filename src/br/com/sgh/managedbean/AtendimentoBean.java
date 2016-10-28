@@ -14,8 +14,8 @@ import br.com.sgh.model.Atendimento;
 @SuppressWarnings("serial")
 @Named
 @ViewScoped
-public class AtendimentoBean implements Serializable{
-
+public class AtendimentoBean extends BaseBean implements Serializable {
+	
 	@Inject
 	private AtendimentoDao atendimentoDao;
 	
@@ -28,6 +28,13 @@ public class AtendimentoBean implements Serializable{
 					.put("atendimentoId", atendimento.getId());
 		
 		return "atendimentoCadastrar?faces-redirect=true";
+	}
+	
+	public void excluir(Atendimento atendimento) {
+		atendimentoDao.deletar(atendimento);
+		atendimentos = atendimentoDao.listarTodos(Atendimento.class);
+		
+		addMessage("Atendimento excluido com sucesso.", "");
 	}
 	
 	public List<Atendimento> getAtendimentos() {

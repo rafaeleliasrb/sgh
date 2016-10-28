@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -14,7 +14,7 @@
 		
 		<ui:define name="conteudo">
 			<h:form id="loginForm">
-				<p:dataTable value="#{atendimentoBean.atendimentos}" var="atendimento" 
+				<p:dataTable id="atendimentos" value="#{atendimentoBean.atendimentos}" var="atendimento" 
 					emptyMessage="Nenhum atendimento cadastrado">
 					<p:column headerText="Paciente">
 						<h:outputText value="#{atendimento.paciente.nome}"/>
@@ -24,9 +24,14 @@
 						<h:outputText value="#{atendimento.medico.nome}"/>
 					</p:column>
 					
-					<p:column>
+					<p:column style="text-align: center;">
 						<p:commandButton action="#{atendimentoBean.editar(atendimento)}"
-							icon="ui-icon-pencil"/>
+							icon="ui-icon-pencil" title="Editar"/>
+						
+						<p:commandButton action="#{atendimentoBean.excluir(atendimento)}"
+							icon="ui-icon-trash" title="Excluir" 
+							style="margin-left: 10px;"
+							update="atendimentos"/>
 					</p:column>
 				</p:dataTable>
 				

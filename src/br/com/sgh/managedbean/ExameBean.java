@@ -1,11 +1,12 @@
 package br.com.sgh.managedbean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,13 +33,16 @@ public class ExameBean extends BaseBean implements Serializable {
 	private Atendimento atendimento;
 	private List<TipoExame> tipoExames;
 	private Integer tipoExameId;
+	private Integer idAtendimento;
 	
-	@PostConstruct
 	public void init() {
-		Integer id = (Integer) FacesContext.getCurrentInstance()
-				.getExternalContext().getFlash().get("atendimentoId");
-		if(id != null) {
-			atendimento = atendimentoDao.getAtendimento(id);
+		setIdAtendimento((Integer) FacesContext
+				.getCurrentInstance()
+				.getExternalContext()
+				.getFlash()
+				.get("atendimentoId"));
+		if(getIdAtendimento() != null) {
+			atendimento = atendimentoDao.getAtendimento(getIdAtendimento());
 		}
 	}
 	
@@ -46,18 +50,23 @@ public class ExameBean extends BaseBean implements Serializable {
 		TipoExame tipoExame = tipoExameDao.getTipoExame(getTipoExameId());
 		exame.setTipoExame(tipoExame);
 		
-		
+		atendimento = atendimentoDao.getAtendimento(idAtendimento);
+		List<Exame> exames = atendimento.getExames()==null?
+				(new ArrayList<Exame>()):atendimento.getExames();
+		exames.add(exame);
+		atendimento.setExames(exames);
 		exame.setAtendimento(atendimento);
-		
 		exameDao.salvar(exame);
+		atendimentoDao.salvar(atendimento);
+		
 		addMessage("Exame salvo com sucesso", "");
 		
 		FacesContext.getCurrentInstance()
 					.getExternalContext()
 					.getFlash()
-					.put("atendimentoId", atendimento.getId());
+					.put("atendimentoId", getIdAtendimento());
 		
-		return "atendimendoCadastrar";
+		return "atendimendoCadastrar?faces-redirect=true";
 	}
 	
 	public Exame getExame() {
@@ -91,5 +100,13 @@ public class ExameBean extends BaseBean implements Serializable {
 
 	public void setTipoExameId(Integer tipoExameId) {
 		this.tipoExameId = tipoExameId;
+	}
+
+	public Integer getIdAtendimento() {
+		return idAtendimento;
+	}
+
+	public void setIdAtendimento(Integer idAtendimento) {
+		this.idAtendimento = idAtendimento;
 	}
 }

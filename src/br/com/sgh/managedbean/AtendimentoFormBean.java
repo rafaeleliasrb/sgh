@@ -3,7 +3,6 @@ package br.com.sgh.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -26,21 +25,23 @@ public class AtendimentoFormBean implements Serializable {
 	@Inject
 	private PessoaDao pessoaDao;
 	
+	private Atendimento atendimento;
 	private List<Medico> medicos;
 	private Integer medicoId;
 	private List<Paciente> pacientes;
 	private Integer pacienteId;
-	private Atendimento atendimento = new Atendimento();
+	private Integer idAtendimento;
 
-	@PostConstruct
 	public void init() {
-		Integer id = (Integer) FacesContext.getCurrentInstance()
+		System.out.println("init()");
+		idAtendimento=(Integer) FacesContext.getCurrentInstance()
 				.getExternalContext().getFlash().get("atendimentoId");
-		if(id != null) {
-			atendimento = atendimentoDao.getAtendimento(id);
+		if(getIdAtendimento() != null) {
+			atendimento = atendimentoDao.getAtendimento(getIdAtendimento());
 			medicoId = atendimento.getMedico().getId();
 			pacienteId = atendimento.getPaciente().getId();
 		}
+		System.out.println("id atend = " + getIdAtendimento());
 	}
 	
 	public void salvar() {
@@ -56,7 +57,9 @@ public class AtendimentoFormBean implements Serializable {
 	
 	public String adicionarExame() {
 		FacesContext.getCurrentInstance()
-					.getExternalContext().getFlash().put("atendimentoId", atendimento.getId());
+					.getExternalContext()
+					.getFlash()
+					.put("atendimentoId", getIdAtendimento());
 		
 		return "exameCadastrar?faces-redirect=true";
 	}
@@ -73,6 +76,9 @@ public class AtendimentoFormBean implements Serializable {
 	}
 
 	public Atendimento getAtendimento() {
+		if(atendimento == null) {
+			atendimento = new Atendimento();
+		}
 		return atendimento;
 	}
 
@@ -105,6 +111,14 @@ public class AtendimentoFormBean implements Serializable {
 
 	public void setPacienteId(Integer pacienteId) {
 		this.pacienteId = pacienteId;
+	}
+
+	public Integer getIdAtendimento() {
+		return idAtendimento;
+	}
+
+	public void setIdAtendimento(Integer idAtendimento) {
+		this.idAtendimento = idAtendimento;
 	}
 
 }

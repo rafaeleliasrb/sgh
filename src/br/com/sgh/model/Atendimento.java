@@ -1,6 +1,5 @@
 package br.com.sgh.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "atendimento")
-public class Atendimento extends BaseModel implements Serializable { 
+public class Atendimento extends BaseModel { 
 
 	private static final long serialVersionUID = 980743033586457684L;
 
@@ -44,12 +43,12 @@ public class Atendimento extends BaseModel implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAtendimento;
 	
-	@OneToMany(cascade = CascadeType.ALL, 
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
 			   mappedBy = "atendimento", 
 			   fetch=FetchType.LAZY)
 	private List<Medicacao> medicacoes;
 	
-	@OneToMany(cascade = CascadeType.ALL, 
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
 			   mappedBy = "atendimento", 
 			   fetch=FetchType.LAZY)
 	private List<Exame> exames;

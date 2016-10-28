@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -8,13 +9,17 @@
 	
 	<ui:composition template="_template.xhtml">
 	
+		<f:metadata>
+			<f:viewAction action="#{atendimentoFormBean.init}"/>
+		</f:metadata>
+	
 		<ui:define name="titulo">
 			<h:outputText value="Cadastrar Atendimento" />
 		</ui:define>
 		
 		<ui:define name="conteudo">
-			<p:messages autoUpdate="true"/>
-			<h:form id="atendimentoCadastrarForm">
+			<h:form>
+				<h:inputHidden value="#{atendimentoFormBean.idAtendimento}"/>
 				<p:panelGrid columns="2">
 					<h:outputLabel value="Médico:" for="medicos"/>
 					<p:selectOneMenu id="medicos" value="#{atendimentoFormBean.medicoId}"
@@ -33,21 +38,21 @@
 						<f:selectItems value="#{atendimentoFormBean.pacientes}" var="paciente"
 							itemLabel="#{paciente.nome}" itemValue="#{paciente.id}"/>
 					</p:selectOneMenu>
-				</p:panelGrid>
-
-				<p:dataTable value="#{atendimentoFormBean.atendimento.exames}" var="exame">
-					<p:column>
-						<h:outputText value="#{exame.dataRealizacao}"/>
-					</p:column>
 					
-					<p:column>
+					<h:outputLabel value="Exames:" for="exames"/>
+					<p:dataList id="exames" value="#{atendimentoFormBean.atendimento.exames}" var="exame">
 						<h:outputText value="#{exame.tipoExame.nome}"/>
-					</p:column>
-					
-					<f:facet name="footer">
-						<p:commandButton value="Adicionar Exame" action="#{atendimentoFormBean.adicionarExame}"/>
-					</f:facet>
-				</p:dataTable>
+						<h:outputText value=" em "></h:outputText>
+						<h:outputText value="#{exame.dataRealizacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="#{initParam.timezone}"/>
+						</h:outputText>
+					</p:dataList>
+				</p:panelGrid>
+				
+				<p:commandButton value="Adicionar Exame" 
+					action="#{atendimentoFormBean.adicionarExame}"
+					process="@form" styleClass="mg-top-padrao"/>
 				
 				<p:commandButton value="Salvar Atendimento" action="#{atendimentoFormBean.salvar}"
 					process="@form" styleClass="mg-top-padrao"/>

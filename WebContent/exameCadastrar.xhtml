@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -7,6 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<ui:composition template="_template.xhtml">
+		<f:metadata>
+			<f:viewAction action="#{exameBean.init}"/>
+		</f:metadata>
 	
 		<ui:define name="titulo">
 			<h:outputText value="Cadastrar Exame" />
@@ -15,9 +19,11 @@
 		<ui:define name="conteudo">
 			<p:messages autoUpdate="true"/>
 			<h:form id="atendimentoCadastrarForm">
+				<h:inputHidden value="#{exameBean.idAtendimento}"/>
 				<p:panelGrid columns="2">
 					<h:outputLabel value="Data realização:" for="dataRealizacao"/>
-					<p:calendar value="#{exameBean.exame.dataRealizacao}" />
+					<p:calendar value="#{exameBean.exame.dataRealizacao}" 
+						pattern="dd/MM/yyyy" timeZone="#{initParam.timezone}"/>
 					
 					<h:outputLabel value="Tipo de exame:" for="tipoExame"/>
 					<p:selectOneMenu id="tipoExame" value="#{exameBean.tipoExameId}"
