@@ -1,5 +1,6 @@
 package br.com.sgh.managedbean;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,6 +60,12 @@ public class MedicoBean extends BaseBean{
 		}		
 	}
 
+	public String novo(){
+		medico = new Medico();
+		especialidades = null;
+		return "medicoCadastrar?faces-redirect=true";
+	}
+	
 	public String editar(){
 		medico = (Medico)getValue("#{medico}");
 		especialidades = null;
@@ -90,7 +97,12 @@ public class MedicoBean extends BaseBean{
 	public DualListModel<Especialidade> getEspecialidades() {
 		if(especialidades == null){
 			List<Especialidade> listaEspecialidade = especialidadeDao.listarTodos(Especialidade.class);
-			List<Especialidade> listaEspecialidadeMedico = especialidadeDao.listar(medico);
+			List<Especialidade> listaEspecialidadeMedico = null;
+			if(medico==null || medico.getId() ==null){
+				listaEspecialidadeMedico = new ArrayList<Especialidade>();
+			}else{
+				listaEspecialidadeMedico = especialidadeDao.listar(medico);				
+			}
 			listaEspecialidade.removeAll(listaEspecialidadeMedico);
 			especialidades = new DualListModel<Especialidade>(listaEspecialidade, listaEspecialidadeMedico);
 		}

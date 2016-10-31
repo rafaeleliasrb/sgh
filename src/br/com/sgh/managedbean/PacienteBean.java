@@ -8,6 +8,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import br.com.sgh.dao.PessoaDao;
+import br.com.sgh.model.Medico;
 import br.com.sgh.model.Paciente;
 
 
@@ -44,6 +45,11 @@ public class PacienteBean extends BaseBean{
 			e.printStackTrace();
 			addErrorMessage("Erro ao excluir paciente", "Erro ao excluir paciente");
 		}		
+	}
+
+	public String novo(){
+		paciente = new Paciente();
+		return "pacienteCadastrar?faces-redirect=true";
 	}
 
 	public String editar(){

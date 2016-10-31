@@ -27,7 +27,7 @@
 				<p:outputLabel value="CPF:" for="cpfPaciente" />
 				<p:inputText value="#{pacienteBean.paciente.cpf}" id="cpfPaciente"/>
 				<p:outputLabel value="Data de Nascimento:" for="dataNascimentoPaciente" />
-				<p:calendar id="dataNascimentoPaciente" pattern="dd/MM/YYYY" value="#{pacienteBean.paciente.dataNascimento}"  showOn="button" />
+				<p:calendar id="dataNascimentoPaciente" pattern="dd/MM/yyyy" navigator="true" value="#{pacienteBean.paciente.dataNascimento}"  showOn="button" />
 				<p:outputLabel value="Matrícula:" for="matriculaPaciente" />
 				<p:inputText value="#{pacienteBean.paciente.matricula}" id="matriculaPaciente"/>
 				<f:facet name="footer">

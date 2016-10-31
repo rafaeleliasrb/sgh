@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Transaction;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.hibernate.type.Type;
 
 public class AuditInterceptor extends EmptyInterceptor {
@@ -63,7 +64,8 @@ public class AuditInterceptor extends EmptyInterceptor {
 	
 
 	public void afterTransactionCompletion(Transaction tx) {
-		if (tx.wasCommitted()) {
+		//if (tx.wasCommitted()) {
+		if (tx.getStatus().equals(TransactionStatus.COMMITTED)) {
 			System.out.println("Creations: " + creates + ", Updates: "
 					+ updates + " Loads: " + loads);
 		}

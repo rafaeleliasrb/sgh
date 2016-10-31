@@ -1,5 +1,6 @@
 package br.com.sgh.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -16,6 +17,7 @@ public class EspecialidadeDao extends GenericDao<Especialidade> {
 
 	@SuppressWarnings("unchecked")
 	public List<Especialidade> listar(Medico medico){
+		if(medico == null || medico.getId()==null) return new ArrayList<Especialidade>();
     	String consulta = "select m.especialidades from Medico m WHERE m=:medico";    	
 		List<Especialidade> especialidades = (List<Especialidade>) super.getSession().createQuery(consulta)
 				.setParameter("medico", medico).list();

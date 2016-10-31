@@ -26,10 +26,10 @@
 				<p:inputText value="#{medicoBean.medico.nome}" id="nomeMedico" />
 				<p:outputLabel value="CPF:" for="cpfMedico" />
 				<p:inputText value="#{medicoBean.medico.cpf}" id="cpfMedico"/>
-				<p:outputLabel value="CPF:" for="crmMedico" />
+				<p:outputLabel value="CRM:" for="crmMedico" />
 				<p:inputText value="#{medicoBean.medico.crm}" id="crmMedico"/>			
 				<p:outputLabel value="Data de Nascimento:" for="dataNascimentoMedico" />
-				<p:calendar id="dataNascimentoMedico" value="#{medicoBean.medico.dataNascimento}"  showOn="button" />
+				<p:calendar id="dataNascimentoMedico" pattern="dd/MM/yyyy" navigator="true" value="#{medicoBean.medico.dataNascimento}"  showOn="button" />
 				<p:outputLabel value="Especialidades" for="especialidadesMedicasList" />
 				<p:pickList id="especialidadesMedicasList" value="#{medicoBean.especialidades}" 
 						var="especialidade" itemLabel="#{especialidade.nome}" itemValue="#{especialidade}" 

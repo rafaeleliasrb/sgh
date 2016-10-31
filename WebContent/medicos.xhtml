@@ -41,7 +41,9 @@
 
 				<p:column headerText="Especialidades" width="300px;" 
 						style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-					<h:outputText value="#{medico.especialidadesString}" title="#{medico.especialidadesString}"/>
+					<h:outputText id="medicoEspecialidadades" value="#{medico.especialidadesString}" title="#{medico.especialidadesString}"/>
+					<p:tooltip value="#{medico.especialidadesString}" for="medicoEspecialidadades" position="bottom"></p:tooltip>
+					
 				</p:column>
 				
 				<p:column headerText="Ações" width="100px;">
@@ -53,7 +55,7 @@
 				</p:column>				
 			</p:dataTable>
 			<br />
-			<p:commandButton value="Novo Médico" ajax="false" action="medicoCadastrar?faces-redirect=true"/>
+			<p:commandButton value="Novo Médico" ajax="false" action="#{medicoBean.novo}"/>
 		</h:form>
 	</div>
 </h:body>
